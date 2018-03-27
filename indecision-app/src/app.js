@@ -3,7 +3,7 @@
 console.log('App.js is running');
 let appObject = {
   title: 'MAIN TITLE',
-  subTitle: 'sub title'
+  subtitle: 'sub title'
 };
 
 
@@ -11,7 +11,7 @@ let appObject = {
 let template = (
   <div>
     <h1>{appObject.title}</h1>
-    <p>{appObject.subTitle}</p>
+    <p>{appObject.subtitle}</p>
     <ol>
       <li>Item one</li>
       <li>Item two</li>
