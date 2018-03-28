@@ -2,10 +2,17 @@
 
 /*eslint-disable */
 
+// MUST RUN ON CLI
+
+// babel src/app.js --out-file=public/scripts/app.js --presets=env,react
+// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+
+// then run live server public
+
 console.log('App.js is running');
 var appObject = {
   title: 'MAIN TITLE',
-  subTitle: 'sub title'
+  subtitle: 'sub title'
 };
 
 // JSX - Javascript XML
@@ -20,7 +27,7 @@ var template = React.createElement(
   React.createElement(
     'p',
     null,
-    appObject.subTitle
+    appObject.subtitle
   ),
   React.createElement(
     'ol',
@@ -28,7 +35,7 @@ var template = React.createElement(
     React.createElement(
       'li',
       null,
-      'Item one'
+      'Item ONE'
     ),
     React.createElement(
       'li',
@@ -53,13 +60,22 @@ var userName = 'Matt';
 var userAge = 35;
 var userLocation = 'New York';
 
+var getLocation = function getLocation(location) {
+  if (location) return React.createElement(
+    'p',
+    null,
+    'location: ',
+    location
+  );
+};
+
 var templateTwo = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    user.name
+    user.name ? user.name : 'Anonymous'
   ),
   React.createElement(
     'p',
@@ -67,14 +83,9 @@ var templateTwo = React.createElement(
     'Age: ',
     user.age
   ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
+  getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
