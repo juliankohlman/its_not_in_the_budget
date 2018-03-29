@@ -10,9 +10,11 @@
 // then run live server public
 
 console.log('App.js is running');
-var appObject = {
-  title: 'MAIN TITLE',
-  subtitle: 'sub title'
+
+var app = {
+  title: 'Indecision App',
+  subtitle: 'An app for getting things done.',
+  options: ['Hex', 'Dec', 'Bin']
 };
 
 // JSX - Javascript XML
@@ -22,12 +24,17 @@ var template = React.createElement(
   React.createElement(
     'h1',
     null,
-    appObject.title
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    'p',
+    null,
+    app.subtitle
   ),
   React.createElement(
     'p',
     null,
-    appObject.subtitle
+    app.options.length ? 'Here are your options' : 'No options'
   ),
   React.createElement(
     'ol',
@@ -35,7 +42,7 @@ var template = React.createElement(
     React.createElement(
       'li',
       null,
-      'Item ONE'
+      'Item one'
     ),
     React.createElement(
       'li',
@@ -53,13 +60,10 @@ var template = React.createElement(
 var user = {
   name: 'Julian',
   age: 33,
-  location: 'Maryland'
+  location: 'Burlingame'
 };
 
-var userName = 'Matt';
-var userAge = 35;
-var userLocation = 'New York';
-
+// booleans get ignored (do not get rendered)
 var getLocation = function getLocation(location) {
   if (location) return React.createElement(
     'p',
@@ -69,6 +73,8 @@ var getLocation = function getLocation(location) {
   );
 };
 
+// true && truthy value => render truthy value
+// false && truthy value => false(a boolean) gets ignored (not rendered)
 var templateTwo = React.createElement(
   'div',
   null,
@@ -77,7 +83,7 @@ var templateTwo = React.createElement(
     null,
     user.name ? user.name : 'Anonymous'
   ),
-  React.createElement(
+  user.age && user.age >= 18 && React.createElement(
     'p',
     null,
     'Age: ',
@@ -88,4 +94,4 @@ var templateTwo = React.createElement(
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
