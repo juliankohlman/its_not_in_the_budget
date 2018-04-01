@@ -10,54 +10,46 @@ console.log('App.js is running');
 let app = {
   title: 'Indecision App',
   subtitle: 'An app for getting things done.',
-  options: ['Hex', 'Dec', 'Bin']
+  options: []
 };
 
-// JSX - Javascript XML
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    <p>{app.options.length ? 'Here are your options' : 'No options'}</p>
-    <ol>
-      <li>Item one</li>
-      <li>Item two</li>
-      <li>Item three</li>
-    </ol>
-  </div>
-);
+const onFormSubmit = (e) => {
+  e.preventDefault(); // stops full page refresh
 
-let count = 0;
+  const option = e.target.elements.option.value // element that event started (form)
 
-
-const addOne = () => {
-  count++
-  renderCounterApp();
-}
-
-const minusOne = () => {
-  count--
-  renderCounterApp();
-}
-
-const reset = () => {
-  count = 0;
-  renderCounterApp();
-}
+  if (option) {
+    // add option to database/app.options array
+    app.options.push(option);
+    // clear the options form
+    e.target.elements.option.value = '';
+  }
+  // re-render
+  renderApp();
+};
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-  const templateTwo = (
+const renderApp = () => {
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <h1>{app.title}</h1>
+      {app.subtitle && <p>{app.subtitle}</p>}
+      <p>{app.options.length ? 'Here are your options' : 'No options'}</p>
+      <p>{app.options.length}</p>
+      <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+        <li>Item three</li>
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option"/>
+        <button>Add Option</button>
+      </form>
     </div>
   );
 
-  ReactDOM.render(templateTwo, appRoot);
-};
+  ReactDOM.render(template, appRoot);
+}
 
-renderCounterApp();
+renderApp();
