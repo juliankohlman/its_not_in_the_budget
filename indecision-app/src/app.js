@@ -1,7 +1,5 @@
-/*eslint-disable */
-
 // MUST RUN ON CLI
-
+/* eslint-disable */
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
@@ -16,7 +14,7 @@ let app = {
 };
 
 // JSX - Javascript XML
-let template = (
+const template = (
   <div>
     <h1>{app.title}</h1>
     {app.subtitle && <p>{app.subtitle}</p>}
@@ -29,28 +27,30 @@ let template = (
   </div>
 );
 
-let user = {
-  name: 'Julian',
-  age: 33,
-  location: 'Burlingame'
-};
+let count = 0;
 
-// booleans get ignored (do not get rendered)
-let getLocation = (location) => {
-  if (location) return <p>location: {location}</p>
-};
 
-// true && truthy value => render truthy value
-// false && truthy value => false(a boolean) gets ignored (not rendered)
-let templateTwo = (
+const addOne = () => {
+  console.log('addOne');
+}
+
+const minusOne = () => {
+  console.log('minusOne');
+}
+
+const reset = () => {
+  console.log('reset');
+}
+
+const templateTwo = (
   <div>
-    <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {(user.age && user.age >=  18) && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
+    <h1>Count: {count}</h1>
+    <button onClick={addOne}>+1</button>
+    <button onClick={minusOne}>-1</button>
+    <button onClick={reset}>Reset</button>
   </div>
 );
 
+const appRoot = document.getElementById('app');
 
-let appRoot = document.getElementById('app');
-
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
