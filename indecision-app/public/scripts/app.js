@@ -13,3 +13,17 @@ var getFirstName = function getFirstName(fullName) {
 };
 
 console.log(getFirstName('Linus Torvald'));
+
+var multiplier = {
+  numbers: [1, 2, 3, 4, 5, 6, 7, 8],
+  multiplyBy: 4,
+  multiply: function multiply() {
+    var _this = this;
+
+    return this.numbers.map(function (n) {
+      return n * _this.multiplyBy;
+    });
+  }
+};
+
+console.log(multiplier.multiply());
