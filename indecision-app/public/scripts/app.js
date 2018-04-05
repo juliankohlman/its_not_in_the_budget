@@ -1,16 +1,14 @@
 'use strict';
 
-console.log('hello world');
+// babel src/playground/build-it-visible.js --out-file=public/scripts/app.js --presets=env,react
+/* eslint-disable */
 
 var appRoot = document.getElementById('app');
 
-var details = {
-  message: 'I\'m not a great programmer; I\'m just a good programmer with great habits.\n\n-Kent Beck',
-  clicked: false
-};
+var visibility = false;
 
 var toggleDetails = function toggleDetails() {
-  details.clicked = true;
+  visibility = !visibility;
   renderApp();
 };
 
@@ -26,12 +24,16 @@ var renderApp = function renderApp() {
     React.createElement(
       'button',
       { onClick: toggleDetails },
-      'Show details'
+      visibility ? 'Hide details' : 'Show details'
     ),
-    details.clicked && React.createElement(
-      'p',
+    visibility && React.createElement(
+      'div',
       null,
-      details.message
+      React.createElement(
+        'p',
+        null,
+        'I\'m not a great programmer; I\'m just a good programmer with great habits. -Kent Beck'
+      )
     )
   );
 

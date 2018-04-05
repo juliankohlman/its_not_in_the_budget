@@ -1,14 +1,12 @@
-console.log('hello world');
+// babel src/playground/build-it-visible.js --out-file=public/scripts/app.js --presets=env,react
+/* eslint-disable */
 
 const appRoot = document.getElementById('app');
 
-const details = {
-  message: 'I\'m not a great programmer; I\'m just a good programmer with great habits.\n\n-Kent Beck',
-  clicked: false
-};
+let visibility = false;
 
 const toggleDetails = () => {
-  details.clicked = true;
+  visibility = !visibility;
   renderApp();
 }
 
@@ -16,8 +14,14 @@ const renderApp = () => {
   const template = (
     <div>
       <h1>Visibility Toggle</h1>
-      <button onClick={toggleDetails}>Show details</button>
-      {details.clicked && <p>{details.message}</p>}
+      <button onClick={toggleDetails}>
+        {visibility ? 'Hide details' : 'Show details'}
+      </button>
+      {visibility && (
+        <div>
+          <p>I'm not a great programmer; I'm just a good programmer with great habits. -Kent Beck</p>
+        </div>
+      )}
     </div>
   );
 
