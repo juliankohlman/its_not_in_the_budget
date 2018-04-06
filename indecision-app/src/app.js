@@ -47,6 +47,20 @@ class Action extends React.Component {
     );
   }
 }
+/*
+  Component State: (State is just an object that changes based on events)
+    - allows components to manage some data
+    - when data changes component re-renders itself automatically
+
+    * Setting up state
+      - Create default state of values
+      1. set up the default state obj --> app renders itself for the very first time
+      2. Component is rendered with default state values* --> happens behind the schenes
+      3. Change state based on event --> some UI event occurs
+      4. The component re-renders using new state values
+      5. Start at step 3 again
+*/
+
 
 class Options extends React.Component {
   // key is a reserved word
