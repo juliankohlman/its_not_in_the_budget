@@ -52,9 +52,16 @@ class Options extends React.Component {
   // key is a reserved word
   // optionText={option} prop is available to the option component
 
+  constructor(props) { // same as this.props inside render();
+    super(props); // set access to this.props
+    // more efficient handleRemoveAll is bound once and we're good togo
+    this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct by default
+  }
+
   // RemoveAll handler
   handleRemoveAll() {
-    alert('remove all handler');
+    // alert('remove all handler');
+    console.log(this.props.options)
   }
 
   render() {

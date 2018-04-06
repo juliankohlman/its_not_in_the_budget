@@ -110,21 +110,29 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
-  function Options() {
+  // key is a reserved word
+  // optionText={option} prop is available to the option component
+
+  function Options(props) {
     _classCallCheck(this, Options);
 
-    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    // set access to this.props
+    // more efficient handleRemoveAll is bound once and we're good togo
+    var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props)); // same as this.props inside render();
+
+
+    _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4); // context in constructor is correct by default
+    return _this4;
   }
+
+  // RemoveAll handler
+
 
   _createClass(Options, [{
     key: 'handleRemoveAll',
-
-    // key is a reserved word
-    // optionText={option} prop is available to the option component
-
-    // RemoveAll handler
     value: function handleRemoveAll() {
-      alert('remove all handler');
+      // alert('remove all handler');
+      console.log(this.props.options);
     }
   }, {
     key: 'render',
