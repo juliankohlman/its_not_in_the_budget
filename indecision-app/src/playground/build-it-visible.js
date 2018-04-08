@@ -1,31 +1,70 @@
 // babel src/playground/build-it-visible.js --out-file=public/scripts/app.js --presets=env,react
-/* eslint-disable */
+/* eslint semi: "off" */
+/* eslint no-console: "off" */
+/* eslint react/jsx-filename-extension: "off" */
+/* eslint react/react-in-jsx-scope: "off" */
 
-const appRoot = document.getElementById('app');
+class VisibilityToggle extends React.Component {
+  constructor(props) {
+    super(props);
+    // handler method
+    this.toggle = this.toggle.bind(this);
+    // visibility state
+    this.state = {
+      visibility: false,
+    }
+  }
 
-let visibility = false;
+  toggle() {
+    this.setState((prevState) => {
+      return {
+        visibility: !prevState.visibility,
+      }
+    })
+  }
 
-const toggleDetails = () => {
-  visibility = !visibility;
-  renderApp();
+  render() {
+    return (
+      <div>
+        <h1>Visibility Toggle</h1>
+        <button onClick={this.toggle}>
+          {this.state.visibility ? 'Hide details' : 'Show details'}
+        </button>
+        {this.state.visibility && (
+          <div>
+            <p>I'm not a great programmer; I'm just a good programmer with great habits. -Kent Beck</p>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
-const renderApp = () => {
-  const template = (
-    <div>
-      <h1>Visibility Toggle</h1>
-      <button onClick={toggleDetails}>
-        {visibility ? 'Hide details' : 'Show details'}
-      </button>
-      {visibility && (
-        <div>
-          <p>I'm not a great programmer; I'm just a good programmer with great habits. -Kent Beck</p>
-        </div>
-      )}
-    </div>
-  );
+// const appRoot = document.getElementById('app');
 
-  ReactDOM.render(template, appRoot);
-}
+// let visibility = false;
 
-renderApp();
+// const toggleDetails = () => {
+//   visibility = !visibility;
+//   renderApp();
+// }
+
+// const renderApp = () => {
+//   const template = (
+//     <div>
+//       <h1>Visibility Toggle</h1>
+//       <button onClick={toggleDetails}>
+//         {visibility ? 'Hide details' : 'Show details'}
+//       </button>
+//       {visibility && (
+//         <div>
+//           <p>I'm not a great programmer; I'm just a good programmer with great habits. -Kent Beck</p>
+//         </div>
+//       )}
+//     </div>
+//   );
+
+// }
+// renderApp();
+
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
