@@ -1,15 +1,31 @@
 /* eslint semi: "off" */
 /* eslint no-console: "off" */
+/* eslint react/jsx-filename-extension: "off" */
+/* eslint react/react-in-jsx-scope: "off" */
+
 class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.addOne = this.addOne.bind(this);
     this.minusOne = this.minusOne.bind(this);
     this.reset = this.reset.bind(this);
+
+    this.state = {
+      // all pieces of state we want to track
+      // default state object
+      count: 0,
+    };
   }
 
   addOne() {
     console.log('addOne');
+    // this.setState({}) => allows component instance to re-render with manipulated state
+    this.setState((prevState) => {
+      // ONLY PROVIDE PIECES OF STATE THAT YOU WANT TO MANIPULATE/UPDATE
+      return {
+        count: prevState.count + 1,
+      }
+    })
   };
 
   minusOne() {
@@ -23,7 +39,8 @@ class Counter extends React.Component {
   render() {
     return (
       <div>
-        <h1> Counter Example </h1>
+        <h1>Counter Example</h1>
+        <h1>Count: {this.state.count}</h1>
         <button onClick={this.addOne}> +1 </button>
         <button onClick={this.minusOne}> -1 </button>
         <button onClick={this.reset}> reset </button>

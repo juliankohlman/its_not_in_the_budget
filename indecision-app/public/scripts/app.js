@@ -10,6 +10,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* eslint semi: "off" */
 /* eslint no-console: "off" */
+/* eslint react/jsx-filename-extension: "off" */
+/* eslint react/react-in-jsx-scope: "off" */
+
 var Counter = function (_React$Component) {
   _inherits(Counter, _React$Component);
 
@@ -21,6 +24,12 @@ var Counter = function (_React$Component) {
     _this.addOne = _this.addOne.bind(_this);
     _this.minusOne = _this.minusOne.bind(_this);
     _this.reset = _this.reset.bind(_this);
+
+    _this.state = {
+      // all pieces of state we want to track
+      // default state object
+      count: 0
+    };
     return _this;
   }
 
@@ -28,6 +37,13 @@ var Counter = function (_React$Component) {
     key: 'addOne',
     value: function addOne() {
       console.log('addOne');
+      // this.setState({}) => allows component instance to re-render with manipulated state
+      this.setState(function (prevState) {
+        // ONLY PROVIDE PIECES OF STATE THAT YOU WANT TO MANIPULATE/UPDATE
+        return {
+          count: prevState.count + 1
+        };
+      });
     }
   }, {
     key: 'minusOne',
@@ -48,7 +64,13 @@ var Counter = function (_React$Component) {
         React.createElement(
           'h1',
           null,
-          ' Counter Example '
+          'Counter Example'
+        ),
+        React.createElement(
+          'h1',
+          null,
+          'Count: ',
+          this.state.count
         ),
         React.createElement(
           'button',
