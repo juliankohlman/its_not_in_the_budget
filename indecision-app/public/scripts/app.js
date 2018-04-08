@@ -38,6 +38,7 @@ var Counter = function (_React$Component) {
     value: function addOne() {
       console.log('addOne');
       // this.setState({}) => allows component instance to re-render with manipulated state
+      // updater-function style
       this.setState(function (prevState) {
         // ONLY PROVIDE PIECES OF STATE THAT YOU WANT TO MANIPULATE/UPDATE
         return {
@@ -49,11 +50,13 @@ var Counter = function (_React$Component) {
     key: 'minusOne',
     value: function minusOne() {
       console.log('minusOne');
+      this.setState({ count: this.state.count - 1 });
     }
   }, {
     key: 'reset',
     value: function reset() {
       console.log('reset');
+      this.setState({ count: 0 });
     }
   }, {
     key: 'render',
