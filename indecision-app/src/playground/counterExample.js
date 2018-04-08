@@ -31,12 +31,18 @@ class Counter extends React.Component {
 
   minusOne() {
     console.log('minusOne');
-    this.setState({ count: this.state.count - 1 })
+
+    this.setState((prevState) => {
+      return { count: prevState.count - 1 }
+    })
   }
 
+  // CALLS TO this.setState() are asynchronous b/c more is happening than just updating an obj
   reset() {
     console.log('reset');
-    this.setState({ count: 0 });
+    this.setState(() => {
+      return { count: 0 }
+    })
   }
 
   render() {

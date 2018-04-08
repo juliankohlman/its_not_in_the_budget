@@ -50,13 +50,21 @@ var Counter = function (_React$Component) {
     key: 'minusOne',
     value: function minusOne() {
       console.log('minusOne');
-      this.setState({ count: this.state.count - 1 });
+
+      this.setState(function (prevState) {
+        return { count: prevState.count - 1 };
+      });
     }
+
+    // CALLS TO this.setState() are asynchronous b/c more is happening than just updating an obj
+
   }, {
     key: 'reset',
     value: function reset() {
       console.log('reset');
-      this.setState({ count: 0 });
+      this.setState(function () {
+        return { count: 0 };
+      });
     }
   }, {
     key: 'render',
