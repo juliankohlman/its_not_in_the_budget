@@ -4,17 +4,36 @@
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
 class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.deleteOptions = this.deleteOptions.bind(this);
+    this.state = {
+      options: ['Thing one', 'Thing two', 'Thing boom'],
+    }
+  }
+
+  // deleteOptions
+  deleteOptions() { // gets passed down to child component <Options />
+    this.setState(() => {
+      return { options: [] };
+    })
+  }
+
   render() {
     const title = 'Indecision';
     const subtitle = 'Put your life in the hands of a computer';
-    const options = ['Thing one', 'Thing two', 'Thing three'];
-
 
     return (
       <div>
         <Header title={title} subtitle={subtitle}/>
-        <Action />
-        <Options options={options}/>
+        <Action
+          hasOptions={this.state.options.length > 0}
+
+        />
+        <Options
+          options={this.state.options}
+          deleteOptions={this.deleteOptions}
+        />
         <AddOption />
       </div>
     );
@@ -40,7 +59,12 @@ class Action extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.handlePick}>What should I do?</button>
+        <button
+          onClick={this.handlePick}
+          disabled={!this.props.hasOptions}
+        >
+          What should I do?
+        </button>
       </div>
     );
   }
@@ -64,25 +88,26 @@ class Options extends React.Component {
   // key is a reserved word
   // optionText={option} prop is available to the option component
 
-  constructor(props) { // same as this.props inside render();
-    super(props); // set access to this.props
-    // more efficient handleRemoveAll is bound once and we're good togo
-    this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct by default
-  }
+  // constructor(props) { // same as this.props inside render();
+  //   super(props); // set access to this.props
+  //   // more efficient handleRemoveAll is bound once and we're good togo
+  //   this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct by default
+  // }
 
   // RemoveAll handler
-  handleRemoveAll() {
-    // alert('remove all handler');
-    console.log(this.props.options)
-  }
+  // handleRemoveAll() {
+  //   // alert('remove all handler');
+  //   console.log(this.props.options)
+  // }
 
   render() {
+    // deleteOptions is passed down to options
     return (
       <div>
         {
           this.props.options.map((option) => <Option key={option} optionText={option}/>)
         }
-        <button onClick={this.handleRemoveAll}>Remove All</button>
+        <button onClick={this.props.deleteOptions}>Remove All</button>
       </div>
     );
   }

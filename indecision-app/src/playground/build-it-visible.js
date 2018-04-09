@@ -17,6 +17,7 @@ class VisibilityToggle extends React.Component {
 
   toggle() {
     this.setState((prevState) => {
+    // always ask yourself if you need to know the current state to calculate the new one?
       return {
         visibility: !prevState.visibility,
       }
@@ -39,32 +40,5 @@ class VisibilityToggle extends React.Component {
     );
   }
 }
-
-// const appRoot = document.getElementById('app');
-
-// let visibility = false;
-
-// const toggleDetails = () => {
-//   visibility = !visibility;
-//   renderApp();
-// }
-
-// const renderApp = () => {
-//   const template = (
-//     <div>
-//       <h1>Visibility Toggle</h1>
-//       <button onClick={toggleDetails}>
-//         {visibility ? 'Hide details' : 'Show details'}
-//       </button>
-//       {visibility && (
-//         <div>
-//           <p>I'm not a great programmer; I'm just a good programmer with great habits. -Kent Beck</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-
-// }
-// renderApp();
 
 ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
