@@ -7,16 +7,29 @@ class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
     this.deleteOptions = this.deleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
     this.state = {
       options: ['Thing one', 'Thing two', 'Thing boom'],
     }
   }
 
-  // deleteOptions
+  // deleteOptions (able to pass this down to child components as a prop)
   deleteOptions() { // gets passed down to child component <Options />
     this.setState(() => {
       return { options: [] };
     })
+  }
+
+
+// const onMakeDecision = () => {
+//   const randomNum = Math.floor(Math.random() * app.options.length);
+//   const option = app.options[randomNum];
+//   alert(option);
+// }
+  handlePick() {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const pick = this.state.options[randomNum];
+    alert(pick);
   }
 
   render() {
@@ -27,12 +40,12 @@ class IndecisionApp extends React.Component {
       <div>
         <Header title={title} subtitle={subtitle}/>
         <Action
-          hasOptions={this.state.options.length > 0}
-
+          hasOptions={this.state.options.length > 0} // are there any options?
+          handlePick={this.handlePick}
         />
         <Options
-          options={this.state.options}
-          deleteOptions={this.deleteOptions}
+          options={this.state.options} // props
+          deleteOptions={this.deleteOptions} // prop => deleteOptions method
         />
         <AddOption />
       </div>
@@ -52,16 +65,12 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-  handlePick() {
-    alert('handlePick');
-  }
-
   render() {
     return (
       <div>
         <button
-          onClick={this.handlePick}
-          disabled={!this.props.hasOptions}
+          onClick={this.props.handlePick} // attributes for button
+          disabled={!this.props.hasOptions} // accessing hasOptions prop
         >
           What should I do?
         </button>

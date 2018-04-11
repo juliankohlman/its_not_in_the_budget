@@ -22,13 +22,14 @@ var IndecisionApp = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
     _this.deleteOptions = _this.deleteOptions.bind(_this);
+    _this.handlePick = _this.handlePick.bind(_this);
     _this.state = {
       options: ['Thing one', 'Thing two', 'Thing boom']
     };
     return _this;
   }
 
-  // deleteOptions
+  // deleteOptions (able to pass this down to child components as a prop)
 
 
   _createClass(IndecisionApp, [{
@@ -38,6 +39,20 @@ var IndecisionApp = function (_React$Component) {
       this.setState(function () {
         return { options: [] };
       });
+    }
+
+    // const onMakeDecision = () => {
+    //   const randomNum = Math.floor(Math.random() * app.options.length);
+    //   const option = app.options[randomNum];
+    //   alert(option);
+    // }
+
+  }, {
+    key: 'handlePick',
+    value: function handlePick() {
+      var randomNum = Math.floor(Math.random() * this.state.options.length);
+      var pick = this.state.options[randomNum];
+      alert(pick);
     }
   }, {
     key: 'render',
@@ -50,12 +65,12 @@ var IndecisionApp = function (_React$Component) {
         null,
         React.createElement(Header, { title: title, subtitle: subtitle }),
         React.createElement(Action, {
-          hasOptions: this.state.options.length > 0
-
+          hasOptions: this.state.options.length > 0 // are there any options?
+          , handlePick: this.handlePick
         }),
         React.createElement(Options, {
-          options: this.state.options,
-          deleteOptions: this.deleteOptions
+          options: this.state.options // props
+          , deleteOptions: this.deleteOptions // prop => deleteOptions method
         }),
         React.createElement(AddOption, null)
       );
@@ -107,11 +122,6 @@ var Action = function (_React$Component3) {
   }
 
   _createClass(Action, [{
-    key: 'handlePick',
-    value: function handlePick() {
-      alert('handlePick');
-    }
-  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -120,8 +130,8 @@ var Action = function (_React$Component3) {
         React.createElement(
           'button',
           {
-            onClick: this.handlePick,
-            disabled: !this.props.hasOptions
+            onClick: this.props.handlePick // attributes for button
+            , disabled: !this.props.hasOptions // accessing hasOptions prop
           },
           'What should I do?'
         )
