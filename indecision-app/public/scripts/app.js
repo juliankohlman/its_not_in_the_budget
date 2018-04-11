@@ -51,8 +51,14 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: 'addOption',
     value: function addOption(option) {
+      if (!option) {
+        return 'Please enter a valid option.';
+      } else if (this.state.options.includes(option)) {
+        return 'This option already exists.';
+      }
+
       this.setState(function (prevState) {
-        // using concat to avoid manipulating state or prev state here directly
+        // using concat() to avoid manipulating state or prevState here directly
         return {
           options: prevState.options.concat(option)
         };
@@ -247,6 +253,10 @@ var AddOption = function (_React$Component6) {
     var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
 
     _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
+    // default state
+    _this6.state = {
+      error: undefined
+    };
     return _this6;
   }
 
@@ -256,14 +266,14 @@ var AddOption = function (_React$Component6) {
       // behavior specific for this component and its form
       e.preventDefault();
 
-      var option = e.target.option.value.trim();
-      // const option = e.target.elements.option.value;
+      var option = e.target.option.value.trim(); // const option = e.target.elements.option.value;
+      var error = this.props.addOption(option); // passed down from parent
 
-      if (option) {
-        this.props.addOption(option); // passed down from parent
-      }
+      this.setState(function () {
+        return { error: error };
+      });
 
-      this.refs.button.reset();
+      this.refs.form.reset();
     }
   }, {
     key: 'render',
@@ -271,6 +281,11 @@ var AddOption = function (_React$Component6) {
       return React.createElement(
         'div',
         null,
+        this.state.error && React.createElement(
+          'p',
+          null,
+          this.state.error
+        ),
         React.createElement(
           'h3',
           null,
@@ -278,7 +293,7 @@ var AddOption = function (_React$Component6) {
         ),
         React.createElement(
           'form',
-          { onSubmit: this.handleAddOption, ref: 'button' },
+          { onSubmit: this.handleAddOption, ref: 'form' },
           React.createElement('input', { type: 'text', name: 'option' }),
           React.createElement(
             'button',
