@@ -63,31 +63,28 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subtitle}</h2>
-      </div>
-    )
-  }
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <h2>{props.subtitle}</h2>
+    </div>
+  )
 }
 
-class Action extends React.Component {
-  render() {
-    return (
-      <div>
-        <button
-          onClick={this.props.handlePick} // calling the handlePick prop
-          disabled={!this.props.hasOptions} // accessing hasOptions prop
-        >
-          What should I do?
-        </button>
-      </div>
-    );
-  }
+const Action = (props) => { // THIS FUNCTION IS THE EQUIVALENT TO render();
+  return (
+    <div>
+      <button
+        onClick={props.handlePick} // calling the handlePick prop
+        disabled={!props.hasOptions} // accessing hasOptions prop
+      >
+        What should I do?
+      </button>
+    </div>
+  );
 }
+
 /*
   Component State: (State is just an object that changes based on events)
     - allows components to manage some data
@@ -103,7 +100,7 @@ class Action extends React.Component {
 */
 
 
-class Options extends React.Component {
+const Options = (props) => {
   // key is a reserved word
   // optionText={option} prop is available to the option component
 
@@ -119,17 +116,16 @@ class Options extends React.Component {
   //   console.log(this.props.options)
   // }
 
-  render() {
+
     // deleteOptions is passed down to options
-    return (
-      <div>
-        {
-          this.props.options.map((option) => <Option key={option} optionText={option}/>)
-        }
-        <button onClick={this.props.deleteOptions}>Remove All</button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      {
+        props.options.map((option) => <Option key={option} optionText={option}/>)
+      }
+      <button onClick={props.deleteOptions}>Remove All</button>
+    </div>
+  );
 }
 
 /*
@@ -139,14 +135,12 @@ class Options extends React.Component {
         })
 */
 
-class Option extends React.Component {
-  render() {
-    return (
-      <div>
-        Option: {this.props.optionText}
-      </div>
-    )
-  }
+const Option = (props) => {
+  return (
+    <div>
+      Option: {props.optionText}
+    </div>
+  )
 }
 
 
@@ -187,5 +181,16 @@ class AddOption extends React.Component {
     );
   }
 }
+
+// Presentational Component
+// const User = (props) => { // NO ACCESS TO THIS MUST USE PROPS
+//   return (
+//     <div>
+//       <h1>Stateless functional component</h1>
+//       <p>Name: {props.name}</p>
+//       <p>Age: {props.age}</p>
+//     </div>
+//   );
+// }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
