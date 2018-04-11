@@ -10,8 +10,8 @@ class IndecisionApp extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.addOption = this.addOption.bind(this);
     this.state = {
-      options: [],
-    }
+      options: props.options
+    };
   }
 
   // deleteOptions (able to pass this down to child components as a prop)
@@ -43,12 +43,11 @@ class IndecisionApp extends React.Component {
   }
 
   render() {
-    const title = 'Indecision';
     const subtitle = 'Put your life in the hands of a computer';
 
     return (
       <div>
-        <Header title={title} subtitle={subtitle}/>
+        <Header subtitle={subtitle}/>
         <Action
           hasOptions={this.state.options.length > 0} // are there any options?
           handlePick={this.handlePick}
@@ -63,14 +62,24 @@ class IndecisionApp extends React.Component {
   }
 }
 
+IndecisionApp.defaultProps = {
+  options: []
+}
+
 const Header = (props) => {
   return (
     <div>
       <h1>{props.title}</h1>
-      <h2>{props.subtitle}</h2>
+      {props.subtitle && <h2>{props.subtitle}</h2>}
     </div>
   )
 }
+
+// Default props for header
+
+Header.defaultProps = {
+  title: 'Indecision'
+};
 
 const Action = (props) => { // THIS FUNCTION IS THE EQUIVALENT TO render();
   return (
@@ -99,7 +108,6 @@ const Action = (props) => { // THIS FUNCTION IS THE EQUIVALENT TO render();
       5. Start at step 3 again
 */
 
-
 const Options = (props) => {
   // key is a reserved word
   // optionText={option} prop is available to the option component
@@ -109,15 +117,7 @@ const Options = (props) => {
   //   // more efficient handleRemoveAll is bound once and we're good togo
   //   this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct by default
   // }
-
-  // RemoveAll handler
-  // handleRemoveAll() {
-  //   // alert('remove all handler');
-  //   console.log(this.props.options)
-  // }
-
-
-    // deleteOptions is passed down to options
+  // deleteOptions is passed down to options
   return (
     <div>
       {

@@ -13,7 +13,7 @@ class Counter extends React.Component {
     this.state = {
       // all pieces of state we want to track
       // default state object
-      count: 0,
+      count: props.count
     };
   }
 
@@ -56,6 +56,10 @@ class Counter extends React.Component {
       </div>
     );
   }
+}
+
+Counter.defaultProps = {
+  count: 0
 }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
