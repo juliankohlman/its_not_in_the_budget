@@ -23,8 +23,9 @@ var IndecisionApp = function (_React$Component) {
 
     _this.deleteOptions = _this.deleteOptions.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
+    _this.addOption = _this.addOption.bind(_this);
     _this.state = {
-      options: ['Thing one', 'Thing two', 'Thing boom']
+      options: []
     };
     return _this;
   }
@@ -40,19 +41,22 @@ var IndecisionApp = function (_React$Component) {
         return { options: [] };
       });
     }
-
-    // const onMakeDecision = () => {
-    //   const randomNum = Math.floor(Math.random() * app.options.length);
-    //   const option = app.options[randomNum];
-    //   alert(option);
-    // }
-
   }, {
     key: 'handlePick',
     value: function handlePick() {
       var randomNum = Math.floor(Math.random() * this.state.options.length);
       var pick = this.state.options[randomNum];
       alert(pick);
+    }
+  }, {
+    key: 'addOption',
+    value: function addOption(option) {
+      this.setState(function (prevState) {
+        // using concat to avoid manipulating state or prev state here directly
+        return {
+          options: prevState.options.concat(option)
+        };
+      });
     }
   }, {
     key: 'render',
@@ -72,7 +76,7 @@ var IndecisionApp = function (_React$Component) {
           options: this.state.options // props
           , deleteOptions: this.deleteOptions // prop => deleteOptions method
         }),
-        React.createElement(AddOption, null)
+        React.createElement(AddOption, { addOption: this.addOption })
       );
     }
   }]);
@@ -130,7 +134,7 @@ var Action = function (_React$Component3) {
         React.createElement(
           'button',
           {
-            onClick: this.props.handlePick // attributes for button
+            onClick: this.props.handlePick // calling the handlePick prop
             , disabled: !this.props.hasOptions // accessing hasOptions prop
           },
           'What should I do?'
@@ -236,22 +240,30 @@ var Option = function (_React$Component5) {
 var AddOption = function (_React$Component6) {
   _inherits(AddOption, _React$Component6);
 
-  function AddOption() {
+  // need constructior b/c we're using this inside of handleAddOption
+  function AddOption(props) {
     _classCallCheck(this, AddOption);
 
-    return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+    var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+    _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
+    return _this6;
   }
 
   _createClass(AddOption, [{
     key: 'handleAddOption',
     value: function handleAddOption(e) {
+      // behavior specific for this component and its form
       e.preventDefault();
+
       var option = e.target.option.value.trim();
       // const option = e.target.elements.option.value;
+
       if (option) {
-        alert('' + option);
-        e.target.option.value = '';
+        this.props.addOption(option); // passed down from parent
       }
+
+      this.refs.button.reset();
     }
   }, {
     key: 'render',
@@ -266,7 +278,7 @@ var AddOption = function (_React$Component6) {
         ),
         React.createElement(
           'form',
-          { onSubmit: this.handleAddOption },
+          { onSubmit: this.handleAddOption, ref: 'button' },
           React.createElement('input', { type: 'text', name: 'option' }),
           React.createElement(
             'button',

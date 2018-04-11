@@ -8,8 +8,9 @@ class IndecisionApp extends React.Component {
     super(props);
     this.deleteOptions = this.deleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
+    this.addOption = this.addOption.bind(this);
     this.state = {
-      options: ['Thing one', 'Thing two', 'Thing boom'],
+      options: [],
     }
   }
 
@@ -20,16 +21,19 @@ class IndecisionApp extends React.Component {
     })
   }
 
-
-// const onMakeDecision = () => {
-//   const randomNum = Math.floor(Math.random() * app.options.length);
-//   const option = app.options[randomNum];
-//   alert(option);
-// }
   handlePick() {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const pick = this.state.options[randomNum];
     alert(pick);
+  }
+
+  addOption(option) {
+    this.setState((prevState) => {
+      // using concat to avoid manipulating state or prev state here directly
+      return {
+        options: prevState.options.concat(option)
+      }
+    })
   }
 
   render() {
@@ -47,7 +51,7 @@ class IndecisionApp extends React.Component {
           options={this.state.options} // props
           deleteOptions={this.deleteOptions} // prop => deleteOptions method
         />
-        <AddOption />
+        <AddOption addOption={this.addOption}/>
       </div>
     );
   }
@@ -69,7 +73,7 @@ class Action extends React.Component {
     return (
       <div>
         <button
-          onClick={this.props.handlePick} // attributes for button
+          onClick={this.props.handlePick} // calling the handlePick prop
           disabled={!this.props.hasOptions} // accessing hasOptions prop
         >
           What should I do?
@@ -141,22 +145,30 @@ class Option extends React.Component {
 
 
 class AddOption extends React.Component {
+  // need constructior b/c we're using this inside of handleAddOption
+  constructor(props) {
+    super(props);
+    this.handleAddOption = this.handleAddOption.bind(this);
+  }
 
-  handleAddOption(e) {
+  handleAddOption(e) { // behavior specific for this component and its form
     e.preventDefault();
+
     const option = e.target.option.value.trim();
     // const option = e.target.elements.option.value;
+
     if (option) {
-      alert(`${option}`)
-      e.target.option.value = '';
+      this.props.addOption(option) // passed down from parent
     }
+
+    this.refs.button.reset();
   }
 
   render() {
     return (
       <div>
         <h3>AddOption</h3>
-        <form onSubmit={this.handleAddOption}>
+        <form onSubmit={this.handleAddOption} ref="button">
           <input type="text" name="option"/>
           <button>Add Option</button>
         </form>
