@@ -9,7 +9,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // MUST RUN ON CLI
-
+/* eslint react/jsx-filename-extension: "off" */
+/* eslint react/react-in-jsx-scope: "off" */
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
@@ -22,6 +23,7 @@ var IndecisionApp = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
     _this.deleteOptions = _this.deleteOptions.bind(_this);
+    _this.deleteOption = _this.deleteOption.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
     _this.addOption = _this.addOption.bind(_this);
     _this.state = {
@@ -41,6 +43,17 @@ var IndecisionApp = function (_React$Component) {
       // must wrap objects in () when using setState updater function syntax
       this.setState(function () {
         return { options: [] };
+      });
+    }
+  }, {
+    key: 'deleteOption',
+    value: function deleteOption(option) {
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.filter(function (i) {
+            return i === option;
+          })
+        };
       });
     }
   }, {
@@ -80,6 +93,7 @@ var IndecisionApp = function (_React$Component) {
         React.createElement(Options, {
           options: this.state.options // props
           , deleteOptions: this.deleteOptions // prop => deleteOptions method
+          , deleteOption: this.deleteOption
         }),
         React.createElement(AddOption, { addOption: this.addOption })
       );
@@ -160,7 +174,11 @@ var Options = function Options(props) {
     'div',
     null,
     props.options.map(function (option) {
-      return React.createElement(Option, { key: option, optionText: option });
+      return React.createElement(Option, {
+        key: option,
+        optionText: option,
+        deleteOption: props.deleteOption
+      });
     }),
     React.createElement(
       'button',
@@ -182,7 +200,16 @@ var Option = function Option(props) {
     'div',
     null,
     'Option: ',
-    props.optionText
+    props.optionText,
+    React.createElement(
+      'button',
+      {
+        onClick: function onClick(e) {
+          props.deleteOption(props.optionText);
+        }
+      },
+      'Remove'
+    )
   );
 };
 

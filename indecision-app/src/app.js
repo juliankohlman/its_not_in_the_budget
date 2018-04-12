@@ -1,5 +1,6 @@
 // MUST RUN ON CLI
-
+/* eslint react/jsx-filename-extension: "off" */
+/* eslint react/react-in-jsx-scope: "off" */
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
@@ -7,6 +8,7 @@ class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
     this.deleteOptions = this.deleteOptions.bind(this);
+    this.deleteOption = this.deleteOption.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.addOption = this.addOption.bind(this);
     this.state = {
@@ -19,6 +21,12 @@ class IndecisionApp extends React.Component {
     // implicit object return
     // must wrap objects in () when using setState updater function syntax
     this.setState(() => ({ options: [] }));
+  }
+
+  deleteOption(option) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter(i => i === option),
+    }));
   }
 
   handlePick() {
@@ -51,6 +59,7 @@ class IndecisionApp extends React.Component {
         <Options
           options={this.state.options} // props
           deleteOptions={this.deleteOptions} // prop => deleteOptions method
+          deleteOption={this.deleteOption}
         />
         <AddOption addOption={this.addOption}/>
       </div>
@@ -117,7 +126,13 @@ const Options = (props) => {
   return (
     <div>
       {
-        props.options.map((option) => <Option key={option} optionText={option}/>)
+        props.options.map((option) => (
+          <Option
+           key={option}
+           optionText={option}
+           deleteOption={props.deleteOption}
+          />
+        ))
       }
       <button onClick={props.deleteOptions}>Remove All</button>
     </div>
@@ -135,6 +150,13 @@ const Option = (props) => {
   return (
     <div>
       Option: {props.optionText}
+      <button
+        onClick={(e) => {
+          props.deleteOption(props.optionText);
+        }}
+      >
+        Remove
+      </button>
     </div>
   )
 }
