@@ -1,5 +1,5 @@
 // MUST RUN ON CLI
-/* eslint-disable */
+
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
@@ -16,9 +16,9 @@ class IndecisionApp extends React.Component {
 
   // deleteOptions (able to pass this down to child components as a prop)
   deleteOptions() { // gets passed down to child component <Options />
-    this.setState(() => {
-      return { options: [] };
-    })
+    // implicit object return
+    // must wrap objects in () when using setState updater function syntax
+    this.setState(() => ({ options: [] }));
   }
 
   handlePick() {
@@ -29,17 +29,13 @@ class IndecisionApp extends React.Component {
 
   addOption(option) {
     if (!option) {
-      return 'Please enter a valid option.'
+      return 'Please enter a valid option.';
     } else if (this.state.options.includes(option)) {
-      return 'This option already exists.'
+      return 'This option already exists.';
     }
 
-    this.setState((prevState) => {
-      // using concat() to avoid manipulating state or prevState here directly
-      return {
-        options: prevState.options.concat(option)
-      }
-    })
+    // using concat() to avoid manipulating state or prevState here directly
+    this.setState(prevState => ({ options: prevState.options.concat(option) }));
   }
 
   render() {
@@ -161,9 +157,7 @@ class AddOption extends React.Component {
     const option = e.target.option.value.trim(); // const option = e.target.elements.option.value;
     const error = this.props.addOption(option)  // passed down from parent
 
-    this.setState(() => {
-      return { error };
-    });
+    this.setState(() => ({ error }));
 
     this.refs.form.reset();
   }
