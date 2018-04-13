@@ -32,10 +32,44 @@ var IndecisionApp = function (_React$Component) {
     return _this;
   }
 
-  // deleteOptions (able to pass this down to child components as a prop)
+  // LIFECYCLE METHODS
+  // can only be used with class based components
 
 
   _createClass(IndecisionApp, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var json = localStorage.getItem('options');
+      var options = JSON.parse(json);
+
+      if (options) this.setState(function () {
+        return { options: options };
+      });
+
+      console.log('Fetching data');
+    }
+
+    // after state values change or after props change
+
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+
+        console.log('saving data');
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount(nextProps, nextState) {
+      console.log('component will unmount');
+    }
+
+    // deleteOptions (able to pass this down to child components as a prop)
+
+  }, {
     key: 'deleteOptions',
     value: function deleteOptions() {
       // gets passed down to child component <Options />
@@ -174,6 +208,11 @@ var Options = function Options(props) {
   return React.createElement(
     'div',
     null,
+    props.options.length === 0 && React.createElement(
+      'p',
+      null,
+      'Please add an option to get started!'
+    ),
     props.options.map(function (option) {
       return React.createElement(Option, {
         key: option,

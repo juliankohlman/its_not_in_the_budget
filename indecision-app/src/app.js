@@ -16,6 +16,31 @@ class IndecisionApp extends React.Component {
     };
   }
 
+  // LIFECYCLE METHODS
+  // can only be used with class based components
+  componentDidMount() {
+    const json = localStorage.getItem('options')
+    const options = JSON.parse(json);
+
+    if (options) this.setState(() => ({ options }));
+
+    console.log('Fetching data');
+  }
+
+  // after state values change or after props change
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);
+
+      console.log('saving data');
+    }
+  }
+
+  componentWillUnmount(nextProps, nextState) {
+    console.log('component will unmount');
+  }
+
   // deleteOptions (able to pass this down to child components as a prop)
   deleteOptions() { // gets passed down to child component <Options />
     // implicit object return
@@ -126,6 +151,7 @@ const Options = (props) => {
   // deleteOptions is passed down to options
   return (
     <div>
+      {props.options.length === 0 && <p>Please add an option to get started!</p>}
       {
         props.options.map(option => (
           <Option
