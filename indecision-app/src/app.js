@@ -23,9 +23,9 @@ class IndecisionApp extends React.Component {
     this.setState(() => ({ options: [] }));
   }
 
-  deleteOption(option) {
-    this.setState((prevState) => ({
-      options: prevState.options.filter(i => i === option),
+  deleteOption(optionToDelete) {
+    this.setState(prevState => ({
+      options: prevState.options.filter(option => optionToDelete !== option),
     }));
   }
 
@@ -51,7 +51,7 @@ class IndecisionApp extends React.Component {
 
     return (
       <div>
-        <Header subtitle={subtitle}/>
+        <Header subtitle={subtitle} />
         <Action
           hasOptions={this.state.options.length > 0} // are there any options?
           handlePick={this.handlePick}
@@ -61,7 +61,7 @@ class IndecisionApp extends React.Component {
           deleteOptions={this.deleteOptions} // prop => deleteOptions method
           deleteOption={this.deleteOption}
         />
-        <AddOption addOption={this.addOption}/>
+        <AddOption addOption={this.addOption} />
       </div>
     );
   }
@@ -97,7 +97,7 @@ const Action = (props) => { // THIS FUNCTION IS THE EQUIVALENT TO render();
       </button>
     </div>
   );
-}
+};
 
 /*
   Component State: (State is just an object that changes based on events)
@@ -120,24 +120,25 @@ const Options = (props) => {
   // constructor(props) { // same as this.props inside render();
   //   super(props); // set access to this.props
   //   // more efficient handleRemoveAll is bound once and we're good togo
-  //   this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct by default
+  //   this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct
+  // by default
   // }
   // deleteOptions is passed down to options
   return (
     <div>
       {
-        props.options.map((option) => (
+        props.options.map(option => (
           <Option
-           key={option}
-           optionText={option}
-           deleteOption={props.deleteOption}
+            key={option}
+            optionText={option}
+            deleteOption={props.deleteOption}
           />
         ))
       }
       <button onClick={props.deleteOptions}>Remove All</button>
     </div>
   );
-}
+};
 
 /*
 <p key={option}>{option}</p>
@@ -151,7 +152,7 @@ const Option = (props) => {
     <div>
       Option: {props.optionText}
       <button
-        onClick={(e) => {
+        onClick={e => {
           props.deleteOption(props.optionText);
         }}
       >

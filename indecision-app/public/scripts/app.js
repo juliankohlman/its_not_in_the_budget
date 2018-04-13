@@ -47,11 +47,11 @@ var IndecisionApp = function (_React$Component) {
     }
   }, {
     key: 'deleteOption',
-    value: function deleteOption(option) {
+    value: function deleteOption(optionToDelete) {
       this.setState(function (prevState) {
         return {
-          options: prevState.options.filter(function (i) {
-            return i === option;
+          options: prevState.options.filter(function (option) {
+            return optionToDelete !== option;
           })
         };
       });
@@ -167,7 +167,8 @@ var Options = function Options(props) {
   // constructor(props) { // same as this.props inside render();
   //   super(props); // set access to this.props
   //   // more efficient handleRemoveAll is bound once and we're good togo
-  //   this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct by default
+  //   this.handleRemoveAll = this.handleRemoveAll.bind(this); // context in constructor is correct
+  // by default
   // }
   // deleteOptions is passed down to options
   return React.createElement(
