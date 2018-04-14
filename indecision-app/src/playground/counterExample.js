@@ -25,11 +25,10 @@ class Counter extends React.Component {
     console.log(count);
   }
 
+  // Saving the count
   componentDidUpdate(prevProps, prevState) {
-
     const json = parseInt(this.state.count);
     localStorage.setItem('count', json);
-    console.log('updating count', json);
   }
 
   addOne() {
