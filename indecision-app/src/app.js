@@ -12,7 +12,7 @@ class IndecisionApp extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.addOption = this.addOption.bind(this);
     this.state = {
-      options: props.options
+      options: []
     };
   }
 
@@ -90,10 +90,6 @@ class IndecisionApp extends React.Component {
       </div>
     );
   }
-}
-
-IndecisionApp.defaultProps = {
-  options: []
 }
 
 const Header = (props) => {

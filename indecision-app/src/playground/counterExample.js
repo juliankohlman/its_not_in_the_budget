@@ -13,8 +13,23 @@ class Counter extends React.Component {
     this.state = {
       // all pieces of state we want to track
       // default state object
-      count: props.count
+      count: 0
     };
+  }
+
+  componentDidMount() {
+    const json = localStorage.getItem('count');
+    const count = JSON.parse(json);
+    if (count !== 0) this.setState(() => ({ count }))
+
+    console.log(count);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+
+    const json = parseInt(this.state.count);
+    localStorage.setItem('count', json);
+    console.log('updating count', json);
   }
 
   addOne() {
@@ -56,10 +71,6 @@ class Counter extends React.Component {
       </div>
     );
   }
-}
-
-Counter.defaultProps = {
-  count: 0
 }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
