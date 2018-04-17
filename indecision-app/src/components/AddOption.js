@@ -7,7 +7,7 @@ export default class AddOption extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this);
     // default state
     this.state = {
-      error: undefined
+      error: undefined,
     };
   }
 
