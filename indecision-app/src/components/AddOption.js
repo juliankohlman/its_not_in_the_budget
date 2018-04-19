@@ -5,24 +5,24 @@ export default class AddOption extends React.Component {
     error: undefined
   };
   // need constructior b/c we're using this inside of handleAddOption
-  constructor(props) {
-    super(props);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    // default state
-    this.state = {
-      error: undefined,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.handleAddOption = this.handleAddOption.bind(this);
+  //   // default state
+  //   // this.state = {
+  //   //   error: undefined,
+  //   // };
+  // }
 
-  handleAddOption(e) {
+  handleAddOption = (e) => {
     // behavior specific for this component and its form
     e.preventDefault();
-
     const option = e.target.option.value.trim(); // const option = e.target.elements.option.value;
     const error = this.props.addOption(option); // passed down from parent
 
     this.setState(() => ({ error }));
 
+    // if (!error) e.target.elements.option.value = '';
     this.refs.form.reset();
   }
 
