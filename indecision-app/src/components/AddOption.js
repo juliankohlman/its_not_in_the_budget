@@ -14,6 +14,7 @@ export default class AddOption extends React.Component {
   //   // };
   // }
 
+  // class prop as arrow function **good for event handlers**
   handleAddOption = (e) => {
     // behavior specific for this component and its form
     e.preventDefault();
@@ -24,7 +25,7 @@ export default class AddOption extends React.Component {
 
     // if (!error) e.target.elements.option.value = '';
     this.refs.form.reset();
-  }
+  };
 
   render() {
     return (

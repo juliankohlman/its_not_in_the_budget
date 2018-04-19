@@ -2,21 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import AddOption from './AddOption';
+import Action from './Action';
 import Header from './Header';
 import Options from './Options';
-import Action from './Action';
+import OptionModal from './OptionModal';
 
 class IndecisionApp extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption: undefined,
   };
-  // constructor(props) {
-  //   super(props);
-  //   this.deleteOptions = this.deleteOptions.bind(this);
-  //   this.deleteOption = this.deleteOption.bind(this);
-  //   this.handlePick = this.handlePick.bind(this);
-  //   this.addOption = this.addOption.bind(this);
-  // }
+
+  // clear selected option state
+  clearSelected = () => {
+    this.setState(() => ({ selectedOption: undefined }))
+  }
+
   // deleteOptions (able to pass this down to child components as a prop)
   deleteOptions = () => {
     // gets passed down to child component <Options />
@@ -34,7 +35,8 @@ class IndecisionApp extends React.Component {
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const pick = this.state.options[randomNum];
-    alert(pick);
+    // alert(pick);
+    this.setState(() => ({ selectedOption: pick }));
   }
 
   addOption = (option) => {
@@ -88,6 +90,10 @@ class IndecisionApp extends React.Component {
           deleteOption={this.deleteOption}
         />
         <AddOption addOption={this.addOption} />
+        <OptionModal 
+          selectedOption={this.state.selectedOption} // this.state when dealing with state directly
+          clearSelected={this.clearSelected} // this.property when dealing with props
+        />
       </div>
     );
   }
