@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default class AddOption extends React.Component {
+  state = {
+    error: undefined
+  };
   // need constructior b/c we're using this inside of handleAddOption
   constructor(props) {
     super(props);
