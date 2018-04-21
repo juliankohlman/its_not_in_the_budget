@@ -1,7 +1,21 @@
 import React from 'react';
 import Option from './Option'; // child component
 
-const Options = (props) => {
+const Options = props => (
+  <div>
+    {props.options.length === 0 && (
+      <p>Please add an option to get started!</p>
+    )}
+    {props.options.map(option => (
+      <Option
+        key={option}
+        optionText={option}
+        deleteOption={props.deleteOption}
+      />
+    ))}
+    <button onClick={props.deleteOptions}>Remove All</button>
+  </div>
+);
   // key is a reserved word
   // optionText={option} prop is available to the option component
 
@@ -12,21 +26,5 @@ const Options = (props) => {
   // by default
   // }
   // deleteOptions is passed down to options
-  return (
-    <div>
-      {props.options.length === 0 && (
-        <p>Please add an option to get started!</p>
-      )}
-      {props.options.map(option => (
-        <Option
-          key={option}
-          optionText={option}
-          deleteOption={props.deleteOption}
-        />
-      ))}
-      <button onClick={props.deleteOptions}>Remove All</button>
-    </div>
-  );
-};
 
 export default Options;

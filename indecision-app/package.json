@@ -6,6 +6,15 @@
   "scripts": {
     "dev-server": "webpack-dev-server"
   },
+  "eslintConfig": {
+        "env": {
+            "browser": true,
+            "node": true
+        },
+        "rules": {
+          "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        }
+  },
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
