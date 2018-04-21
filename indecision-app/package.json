@@ -7,13 +7,21 @@
     "dev-server": "webpack-dev-server"
   },
   "eslintConfig": {
-        "env": {
-            "browser": true,
-            "node": true
-        },
-        "rules": {
-          "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
         }
+      ]
+    }
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -22,11 +30,15 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
+    "css-loader": "^0.28.11",
     "global": "^4.3.2",
     "live-server": "^1.2.0",
+    "node-sass": "^4.8.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-modal": "^3.4.2",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
     "validator": "^9.4.1",
     "webpack": "^4.5.0",
     "webpack-dev-server": "^3.1.3"
