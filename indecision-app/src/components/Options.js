@@ -3,17 +3,17 @@ import Option from './Option'; // child component
 
 const Options = props => (
   <div>
+    <button onClick={props.deleteOptions}>Remove All</button>
     {props.options.length === 0 && (
       <p>Please add an option to get started!</p>
     )}
     {props.options.map(option => (
       <Option
-        key={option}
-        optionText={option}
-        deleteOption={props.deleteOption}
+      key={option}
+      optionText={option}
+      deleteOption={props.deleteOption}
       />
     ))}
-    <button onClick={props.deleteOptions}>Remove All</button>
   </div>
 );
   // key is a reserved word
