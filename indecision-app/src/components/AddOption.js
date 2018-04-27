@@ -22,7 +22,6 @@ export default class AddOption extends React.Component {
     const error = this.props.addOption(option); // passed down from parent
 
     this.setState(() => ({ error }));
-
     // if (!error) e.target.elements.option.value = '';
     this.refs.form.reset();
   };
