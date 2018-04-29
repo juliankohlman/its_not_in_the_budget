@@ -1,6 +1,5 @@
 import React from 'react';
-import Modal from 'react-modal';
-
+import Modal from 'react-modal'; // using react-modal 3rd party component
 const OptionModal = props => (
   <Modal
     isOpen={!!props.selectedOption}
