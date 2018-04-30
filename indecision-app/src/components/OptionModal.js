@@ -8,6 +8,7 @@ const OptionModal = props => (
     // pressing escape key or clicking background
     onRequestClose={props.clearSelected}
     contentLabel="Selected Option"
+    closeTimeoutMS={200}
   >
     <h3>Selected Option </h3>
     {props.selectedOption && <p>{props.selectedOption}</p>}
