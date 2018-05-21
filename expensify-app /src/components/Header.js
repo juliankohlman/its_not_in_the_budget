@@ -6,17 +6,12 @@ const Header = () => (
     <h1>Expensify</h1>
     <li>
       <NavLink to="/" activeClassName="is-active" exact={true}>
-        Home
+        Dashboard
       </NavLink>
     </li>
     <li>
       <NavLink to="/create" activeClassName="is-active">
         Create Expense
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to="/edit" activeClassName="is-active">
-        Edit Expense
       </NavLink>
     </li>
     <li>
