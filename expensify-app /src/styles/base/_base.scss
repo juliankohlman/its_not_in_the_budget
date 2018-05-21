@@ -4,6 +4,8 @@ html {
 
 body {
   // background: $dark-blue;
+  padding: 20px;
+  margin: auto;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: $m-size;
 }
@@ -14,6 +16,10 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
 }
 
 
