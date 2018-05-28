@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 // Possible actions
-// ADD_EXPENSE
+// ADD_EXPENSE (action generator)
 const addExpense = ({
   description = '', note = '', amount = 0, createdAt = 0,
 } = {}) => ({
@@ -14,13 +14,18 @@ const addExpense = ({
     createdAt,
   },
 });
+// REMOVE_EXPENSE
+const removeExpense = ({ id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id,
+});
 // EDIT_EXPENSE
+const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates,
+});
 
-// SET_TEXT_FILTER
-// SORT_BY_DATE
-// SORT_BY_AMOUNT
-// SET_START_DATE
-// SET_END_DATE
 
 // Expenses Reducer
 const expensesReducerDefault = [];
@@ -28,11 +33,25 @@ const expensesReducerDefault = [];
 const expensesReducer = (state = expensesReducerDefault, action) => {
   switch (action.type) {
     case 'ADD_EXPENSE':
-      return [...state, action.expense];
+    return [...state, action.expense];
+    case 'REMOVE_EXPENSE':
+    return state.filter(i => i.id !== action.id);
+    case 'EDIT_EXPENSE':
+    return state.map(i => i.id === action.id ? {...i, ...action.updates} : i);
     default:
-      return state;
+    return state;
   }
 };
+
+// SET_TEXT_FILTER
+// SORT_BY_DATE
+// SORT_BY_AMOUNT
+// SET_START_DATE
+// SET_END_DATE
+const setTextFilter = (text = '') => ({
+  type: 'SET_TEXT_FILTER',
+  text,
+});
 
 const filtersReducerDefault = {
   text: '',
@@ -43,6 +62,8 @@ const filtersReducerDefault = {
 
 const filtersReducer = (state = filtersReducerDefault, action) => {
   switch (action.type) {
+    case 'SET_TEXT_FILTER':
+      return { ...state, text: action.text };
     default:
       return state;
   }
@@ -58,8 +79,13 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
-store.dispatch(addExpense({ description: 'Netflix', amount: 300 }));
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Netflix', amount: 300 }));
+
+store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+
+store.dispatch(setTextFilter('rent'));
 
 // root state object
 const demoState = {
