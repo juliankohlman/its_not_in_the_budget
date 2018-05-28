@@ -56,15 +56,16 @@ const sortByAmount = () => ({
   type: 'SORT_BY_AMOUNT',
 });
 // SET_START_DATE
-const setStartDate = (startDate = undefined) => ({
+const setStartDate = startDate => ({
   type: 'SET_START_DATE',
   startDate,
-})
+});
 // SET_END_DATE
-const setEndDate = (endDate = undefined) => ({
+const setEndDate = endDate => ({
   type: 'SET_END_DATE',
   endDate,
-})
+});
+// Filters default state
 const filtersReducerDefault = {
   text: '',
   sortBy: 'date',
@@ -116,22 +117,22 @@ store.dispatch(setStartDate());
 
 store.dispatch(setEndDate(1250));
 
-// root state object
-const demoState = {
-  // array of objects
-  expenses: [
-    {
-      id: 'asdf',
-      description: 'July Rent',
-      note: 'A random not about the expense',
-      amount: 54500,
-      createdAt: 0,
-    },
-  ],
-  filters: {
-    text: 'rent',
-    sortBy: 'amount', // date or amount
-    startDate: undefined,
-    endDate: undefined,
-  },
-};
+// root state object example
+// const demoState = {
+//   // array of objects
+//   expenses: [
+//     {
+//       id: 'asdf',
+//       description: 'July Rent',
+//       note: 'A random not about the expense',
+//       amount: 54500,
+//       createdAt: 0,
+//     },
+//   ],
+//   filters: {
+//     text: 'rent',
+//     sortBy: 'amount', // date or amount
+//     startDate: undefined,
+//     endDate: undefined,
+//   },
+// };
