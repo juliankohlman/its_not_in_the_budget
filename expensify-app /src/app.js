@@ -11,22 +11,21 @@ import './styles/styles.scss';
 
 const store = configureStore();
 
-store.dispatch(addExpense({description: 'water bill', note: 'pay next week', amount: 45}));
-store.dispatch(addExpense({ description: 'gas bill', note: 'pay next month', amount: 50 }));
+store.dispatch(
+	addExpense({ description: 'Water bill', note: 'pay next week', amount: 45 })
+);
+store.dispatch(
+	addExpense({ description: 'Gas bill', note: 'pay next month', amount: 50 })
+);
+store.dispatch(addExpense({ description: 'Rent', amount: 109500 }));
 
-store.dispatch(setTextFilter('water'));
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpenses);
 
-setTimeout(() => {
-  store.dispatch(setTextFilter('bill'))
-}, 3000);
-
-// props => stateless functional component
-// this.props => class based component
 ReactDOM.render(
-  <Provider store={store}>
-    <AppRouter />
-  </Provider>, document.getElementById('app')
+	<Provider store={store}>
+		<AppRouter />
+	</Provider>,
+	document.getElementById('app')
 );
