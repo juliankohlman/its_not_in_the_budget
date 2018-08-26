@@ -17,15 +17,13 @@ export default class ExpenseForm extends Component {
 	};
 
 	onFocusChange = ({ focused }) => {
-		this.setState(() => ({
-			calendarFocused: focused
-		}));
+		this.setState(() => ({ calendarFocused: focused }));
 	};
 
 	onDateChange = createdAt => {
-		this.setState(() => {
-			createdAt;
-		});
+		this.setState(() => ({
+			createdAt
+		}));
 	};
 
 	onDescriptionChange = e => {
@@ -71,6 +69,9 @@ export default class ExpenseForm extends Component {
 						onDateChange={this.onDateChange}
 						focused={this.state.calendarFocused}
 						onFocusChange={this.onFocusChange}
+						numberOfMonths={1}
+						// makes current day and any day in the past available
+						isOutsideRange={() => false}
 					/>
 					<textarea
 						value={this.state.note}
