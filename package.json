@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"main": "app.js",
 	"license": "MIT",
+	"engines": {
+		"node": "8.11.4"
+	},
 	"scripts": {
 		"build:dev": "webpack",
 		"build:prod": "webpack -p --env production",
