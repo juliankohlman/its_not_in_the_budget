@@ -10,9 +10,9 @@ const config = {
 };
 
 firebase.initializeApp(config);
+const database = firebase.database();
 
-firebase
-	.database()
+database
 	.ref()
 	.set({
 		name: 'J. Kohlman',
@@ -21,19 +21,30 @@ firebase
 		location: {
 			city: 'Westminster'
 		}
+	})
+	.then(() => {
+		console.log('Data saved');
+	})
+	.catch(e => {
+		console.log('This failed', e);
 	});
 
-firebase
-	.database()
-	.ref('attributes')
-	.set({ height: 73, weigth: 215 });
+database.ref().update({
+	name: 'Julian J. Kohlman',
+	hobby: 'Reading',
+	location: {
+		city: 'Seattle'
+	}
+});
 
-firebase
-	.database()
-	.ref('name')
-	.set('Julian J.');
+// database.ref('location/city').set(null)
 
-firebase
-	.database()
-	.ref('location/city')
-	.set('Washington');
+// database
+// 	.ref('location/city')
+// 	.remove()
+// 	.then(() => {
+// 		console.log('Remove succeeded.');
+// 	})
+// 	.catch(error => {
+// 		console.log('Remove failed', error);
+// 	});
