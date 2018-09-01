@@ -15,5 +15,25 @@ firebase
 	.database()
 	.ref()
 	.set({
-		name: 'J. Kohlman'
+		name: 'J. Kohlman',
+		hobby: 'Daily Fantasy Sports',
+		dreamJob: 'Cinematographer',
+		location: {
+			city: 'Westminster'
+		}
 	});
+
+firebase
+	.database()
+	.ref('attributes')
+	.set({ height: 73, weigth: 215 });
+
+firebase
+	.database()
+	.ref('name')
+	.set('Julian J.');
+
+firebase
+	.database()
+	.ref('location/city')
+	.set('Washington');
