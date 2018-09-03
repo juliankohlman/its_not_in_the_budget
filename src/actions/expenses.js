@@ -34,7 +34,6 @@ export const startAddExpense = (expenseData = {}) => {
 			.push(expense)
 			.then(ref => {
 				// dispatch the action so redux store changes
-
 				dispatch(
 					addExpense({
 						id: ref.key,
@@ -55,3 +54,26 @@ export const editExpense = (id, updates) => ({
 	id,
 	updates
 });
+
+// GET/SET_EXPENSES (dispatch, async action)
+export const getExpenses = expenses => ({
+	type: 'GET_EXPENSES',
+	expenses
+});
+
+// fetch all expense data once
+// parse data into array
+export const startGetExpenses = () => {
+	return dispatch => {
+		return database
+			.ref('expenses')
+			.once('value')
+			.then(snapshot => {
+				const expenses = [];
+				snapshot.forEach(child => {
+					expenses.push({ id: child.key, ...child.val() });
+				});
+				dispatch(getExpenses(expenses));
+			});
+	};
+};
