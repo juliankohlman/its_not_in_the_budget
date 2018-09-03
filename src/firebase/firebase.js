@@ -13,12 +13,33 @@ firebase.initializeApp(config);
 const database = firebase.database();
 
 // database.ref('notes/-LLRmipP-dKsciosXnS8').remove();
-database.ref('expenses').push({
-	description: 'an expense',
-	note: 'optional note text',
-	amount: '$100',
-	createdAt: 'date expense created on'
+// database
+// 	.ref('expenses')
+// 	.once('value')
+// 	.then(snapshot => {
+// 		const expenses = [];
+
+// 		snapshot.forEach(child => {
+// 			expenses.push({ id: child.key, ...child.val() });
+// 		});
+// 		console.log(snapshot.val());
+// 		console.log(expenses);
+// 	});
+
+database.ref('expenses').on('value', snapshot => {
+	const expenses = [];
+	snapshot.forEach(child => {
+		expenses.push({ id: child.key, ...child.val() });
+	});
+	console.log(snapshot.val());
+	console.log(expenses);
 });
+// database.ref('expenses').push({
+// 	description: 'Netflix',
+// 	note: 'netflix and chill',
+// 	amount: '$10',
+// 	createdAt: 'date expense created on'
+// });
 
 // database.ref('notes').push({
 // 	title: 'to do list',
@@ -56,7 +77,7 @@ database.ref('expenses').push({
 // 	}
 // ];
 
-database.ref('notes').set(notes);
+// database.ref('notes').set(notes);
 
 // database.ref().on('value', snapshot => {
 // 	console.log(snapshot.val());
