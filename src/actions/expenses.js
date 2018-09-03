@@ -1,4 +1,6 @@
 import uuid from 'uuid';
+import database from '../firebase/firebase';
+
 /* Redux action steps
 	1. Component calls the action generator
 	2. Action generator returns an {object}
@@ -12,21 +14,36 @@ import uuid from 'uuid';
 	3. Component dispatches function
 	4. Function runs (has the ability to dispatch other actions and run database code/interactions)
 */
-export const addExpense = ({
-	description = '',
-	note = '',
-	amount = 0,
-	createdAt = 0
-} = {}) => ({
+export const addExpense = expense => ({
 	type: 'ADD_EXPENSE',
-	expense: {
-		id: uuid(),
-		description,
-		note,
-		amount,
-		createdAt
-	}
+	expense
 });
+
+export const startAddExpense = (expenseData = {}) => {
+	return dispatch => {
+		const {
+			description = '',
+			note = '',
+			amount = 0,
+			createdAt = 0
+		} = expenseData;
+		const expense = { description, note, amount, createdAt };
+
+		database
+			.ref('expenses')
+			.push(expense)
+			.then(ref => {
+				// dispatch the action so redux store changes
+
+				dispatch(
+					addExpense({
+						id: ref.key,
+						...expense
+					})
+				);
+			});
+	};
+};
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
 	type: 'REMOVE_EXPENSE',
