@@ -12,13 +12,59 @@ const config = {
 firebase.initializeApp(config);
 const database = firebase.database();
 
-database.ref().on('value', snapshot => {
-	console.log(snapshot.val());
+// database.ref('notes/-LLRmipP-dKsciosXnS8').remove();
+database.ref('expenses').push({
+	description: 'an expense',
+	note: 'optional note text',
+	amount: '$100',
+	createdAt: 'date expense created on'
 });
 
-setTimeout(() => {
-	database.ref('InterstellarCredits').set(2000);
-}, 3500);
+// database.ref('notes').push({
+// 	title: 'to do list',
+// 	body: 'a notes body text'
+// });
+
+// const firebaseNotes = {
+// 	notes: {
+// 		abcdefg: {
+// 			title: 'boom',
+// 			body: 'bam'
+// 		},
+// 		uniqueId: {
+// 			title: 'bam',
+// 			body: 'boom'
+// 		}
+// 	}
+// };
+
+// const notes = [
+// 	{
+// 		id: '12',
+// 		title: 'Note title',
+// 		body: 'text in body'
+// 	},
+// 	{
+// 		id: '13',
+// 		title: 'Note title',
+// 		body: 'text in body'
+// 	},
+// 	{
+// 		id: '14',
+// 		title: 'Note title',
+// 		body: 'text in body'
+// 	}
+// ];
+
+database.ref('notes').set(notes);
+
+// database.ref().on('value', snapshot => {
+// 	console.log(snapshot.val());
+// });
+
+// setTimeout(() => {
+// 	database.ref('InterstellarCredits').set(2000);
+// }, 3500);
 
 // database
 // 	.ref('ship') // for specific data add inside ref() call
