@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
+import Login from './components/LoginPage';
 import configureStore from './store/configureStore';
 import { startGetExpenses } from './actions/expenses';
 // import { addExpense } from './actions/expenses';
@@ -10,7 +11,7 @@ import { startGetExpenses } from './actions/expenses';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
-import './firebase/firebase';
+import { firebase } from './firebase/firebase';
 // import './playground/promises';
 
 const store = configureStore();
@@ -28,6 +29,7 @@ const store = configureStore();
 // console.log(visibleExpenses);
 const jsx = (
 	<Provider store={store}>
+		{/* <Login /> */}
 		<AppRouter />
 	</Provider>
 );
@@ -36,4 +38,12 @@ ReactDOM.render(<p>Loading expenses..</p>, document.getElementById('app'));
 
 store.dispatch(startGetExpenses()).then(() => {
 	ReactDOM.render(jsx, document.getElementById('app'));
+});
+
+firebase.auth().onAuthStateChanged(user => {
+	if (user) {
+		console.log('logged in');
+	} else {
+		console.log('logged out');
+	}
 });
