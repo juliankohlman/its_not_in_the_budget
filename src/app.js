@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import AppRouter from './routers/AppRouter';
+import AppRouter, { history } from './routers/AppRouter';
 import Login from './components/LoginPage';
 import configureStore from './store/configureStore';
 import { startGetExpenses } from './actions/expenses';
@@ -16,34 +16,31 @@ import { firebase } from './firebase/firebase';
 
 const store = configureStore();
 
-// store.dispatch(
-// 	addExpense({ description: 'Water bill', note: 'pay next week', amount: 45 })
-// );
-// store.dispatch(
-// 	addExpense({ description: 'Gas bill', note: 'pay next month', amount: 50 })
-// );
-// store.dispatch(addExpense({ description: 'Rent', amount: 109500 }));
-
-// const state = store.getState();
-// const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-// console.log(visibleExpenses);
 const jsx = (
 	<Provider store={store}>
-		{/* <Login /> */}
 		<AppRouter />
 	</Provider>
 );
+let hasRendered = false;
+const renderApp = () => {
+	if (!hasRendered) {
+		ReactDOM.render(jsx, document.getElementById('app'));
+		hasRendered = true;
+	}
+};
 
 ReactDOM.render(<p>Loading expenses..</p>, document.getElementById('app'));
 
-store.dispatch(startGetExpenses()).then(() => {
-	ReactDOM.render(jsx, document.getElementById('app'));
-});
-
 firebase.auth().onAuthStateChanged(user => {
 	if (user) {
-		console.log('logged in');
+		store.dispatch(startGetExpenses()).then(() => {
+			renderApp();
+			if (history.location.pathname === '/') {
+				history.push('/dashboard');
+			}
+		});
 	} else {
-		console.log('logged out');
+		renderApp();
+		history.push('/');
 	}
 });

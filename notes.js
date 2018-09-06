@@ -1,4 +1,15 @@
 /*
+store.dispatch(
+	addExpense({ description: 'Water bill', note: 'pay next week', amount: 45 })
+);
+store.dispatch(
+	addExpense({ description: 'Gas bill', note: 'pay next month', amount: 50 })
+);
+store.dispatch(addExpense({ description: 'Rent', amount: 109500 }));
+
+const state = store.getState();
+const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+console.log(visibleExpenses);
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
