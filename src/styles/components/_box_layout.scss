@@ -1,0 +1,15 @@
+.layout {
+	background: url('/images/christine-roy-343235-unsplash.jpg');
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-layout {
+	background: fade-out($color: white, $amount: 0.15);
+	border-radius: 15px;
+	text-align: center;
+}
