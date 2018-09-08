@@ -1,8 +1,8 @@
 {
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "Will-o'-Wisp Theme",
   "editor.tabSize": 2,
   "window.zoomLevel": 1,
-  "editor.fontSize": 16,
+  "editor.fontSize": 14,
   "sublimeTextKeymap.promptV3Features": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.snippetSuggestions": "top",
