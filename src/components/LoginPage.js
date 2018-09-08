@@ -4,7 +4,7 @@ import { startLogin } from '../actions/auth';
 
 export const Login = ({ startLogin }) => {
 	return (
-		<div>
+		<div className="layout">
 			<h1>Login Page Component</h1>
 			<button onClick={startLogin}>Login to account</button>
 		</div>
