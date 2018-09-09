@@ -1,0 +1,12 @@
+.login-button {
+	background-color: $button-base;
+	border: none;
+	color: #efefef;
+	padding: 10px;
+	font-size: $font-size;
+	font-weight: 300;
+	&:hover {
+		background-color: $button-hover;
+		transition: background-color 0.3s ease-in;
+	}
+}

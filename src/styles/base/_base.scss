@@ -3,24 +3,11 @@ html {
 }
 
 body {
-	// background: $dark-blue;
+	color: $dark-grey;
 	margin: auto;
-	// font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-family: 'Nunito', sans-serif;
 	font-size: $m-size;
-	h1 {
-		color: #ccc7c3;
-	}
-	li {
-		color: #ccc7c3;
-	}
-
-	a:hover {
-		color: #14b278;
-	}
-	p {
-		color: #ccc7c3;
-	}
+	line-height: 1.6;
 }
 
 button {

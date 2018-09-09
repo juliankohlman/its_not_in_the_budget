@@ -6,12 +6,14 @@ export const Login = ({ startLogin }) => {
 	return (
 		<div className="layout">
 			<div className="login-layout">
-				<h1>It's Not In The Budget</h1>
+				<h1 className="login-title">It's Not In The Budget</h1>
 				<p>
 					Wealth consists not in having great possessions, but in
 					having few wants. ...
 				</p>
-				<button onClick={startLogin}>Login</button>
+				<button className="login-button" onClick={startLogin}>
+					Login with Google
+				</button>
 			</div>
 		</div>
 	);
