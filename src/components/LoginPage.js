@@ -11,7 +11,7 @@ export const Login = ({ startLogin }) => {
 					Wealth consists not in having great possessions, but in
 					having few wants. ...
 				</p>
-				<button className="login-button" onClick={startLogin}>
+				<button className="button" onClick={startLogin}>
 					Login with Google
 				</button>
 			</div>
