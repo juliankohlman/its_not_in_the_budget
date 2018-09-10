@@ -18,8 +18,13 @@
 .button--link {
 	background: none;
 	cursor: pointer;
+	&:hover {
+		background-color: $dark-blue;
+		font-weight: bold;
+	}
 }
 
 .button-other {
 	background: gray;
+	margin-top: $m-size;
 }
