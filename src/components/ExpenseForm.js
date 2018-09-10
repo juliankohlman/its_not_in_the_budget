@@ -58,7 +58,7 @@ export default class ExpenseForm extends Component {
 
 		if (!this.state.description || !this.state.amount) {
 			this.setState(() => ({
-				error: 'ERROR: Please submit an expense description and amount.'
+				error: 'Please submit an expense description and amount.'
 			}));
 		} else {
 			this.setState(() => ({ error: '' }));
@@ -74,8 +74,10 @@ export default class ExpenseForm extends Component {
 	render() {
 		return (
 			<div className="content">
-				{this.state.error && <p>{this.state.error}</p>}
-				<form onSubmit={this.onSubmit}>
+				<form className="form" onSubmit={this.onSubmit}>
+					{this.state.error && (
+						<p className="form-error">{this.state.error}</p>
+					)}
 					<input
 						className="text-input"
 						type="text"
@@ -109,7 +111,7 @@ export default class ExpenseForm extends Component {
 					/>
 				</form>
 				<button className="button" onClick={this.onSubmit}>
-					Add Expense
+					Save Expense
 				</button>
 			</div>
 		);
