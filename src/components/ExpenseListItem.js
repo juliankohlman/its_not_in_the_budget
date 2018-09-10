@@ -4,15 +4,16 @@ import moment from 'moment';
 import numeral from 'numeral';
 
 const ExpenseListItem = ({ id, description, amount, createdAt }) => (
-	<div>
-		<Link to={`/edit/${id}`}>
-			<h3>Description: {description}</h3>
-		</Link>
-		<p>Amount: {numeral(amount / 100).format('$0,0.00')}</p>
-		<p>Expense created: {moment(createdAt).format('MMMM Do, YYYY')}</p>
+	<Link className="list-item" to={`/edit/${id}`}>
+		<div>
+			<h3 className="item-title">{description}</h3>
+			<span className="item-sub-title">
+				Created {moment(createdAt).format('MMMM Do, YYYY')}
+			</span>
+		</div>
 
-		<hr />
-	</div>
+		<h3 className="list-data">{numeral(amount / 100).format('$0,0.00')}</h3>
+	</Link>
 );
 
 export default ExpenseListItem;

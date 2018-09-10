@@ -5,13 +5,13 @@ import selectExpenses from '../selectors/expenses';
 
 const ExpenseList = props => (
 	<div className="content">
-		<div>
+		<div className="list-header">
 			<div className="show-on-mobile">Expenses</div>
 			<div className="show-on-desktop">Expense</div>
 			<div className="show-on-desktop">Amount</div>
 		</div>
-		<h1>Expenses</h1>
-		<hr />
+		{/* <h1>Expenses</h1>
+		<hr /> */}
 
 		{props.expenses.length === 0 ? (
 			<p>No current expenses</p>

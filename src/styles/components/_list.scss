@@ -1,0 +1,36 @@
+.list-header {
+	background: $light-grey;
+	border: 1px solid darken($light-grey, 7%);
+	color: $mid-grey;
+	display: flex;
+	justify-content: space-between;
+	padding: $s-size $m-size;
+}
+
+.list-item {
+	border: 1px solid darken($light-grey, 7%);
+	border-top: none;
+	color: $dark-grey;
+	padding: $s-size;
+	text-decoration: none;
+	display: flex;
+	transition: background 0.3s ease;
+	flex-direction: column;
+	&:hover {
+		background: $light-grey;
+	}
+	@media (min-width: $desktop-breakpoint) {
+		align-items: center;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: $m-size;
+	}
+	.item-title {
+		margin: 0;
+		word-break: break-all;
+	}
+	.item-sub-title {
+		color: $mid-grey;
+		font-size: $font-size-sm;
+	}
+}

@@ -3,7 +3,7 @@
 	border: none;
 	color: #efefef;
 	padding: 10px;
-	font-size: $font-size;
+	font-size: $font-size-lg;
 	font-weight: 300;
 	display: inline-block;
 	text-decoration: none;
@@ -18,8 +18,9 @@
 .button--link {
 	background: none;
 	cursor: pointer;
+	transition: font-weight 0.3s ease;
 	&:hover {
-		background-color: $dark-blue;
+		background: none;
 		font-weight: bold;
 	}
 }
