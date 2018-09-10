@@ -12,22 +12,17 @@ const ExpenseList = props => (
 		</div>
 		{/* <h1>Expenses</h1>
 		<hr /> */}
-
-		{props.expenses.length === 0 ? (
-			<div className="list-item list-item-msg">
-				<span>No current expenses</span>
-			</div>
-		) : (
-			props.expenses.map(expense => (
-				<ExpenseListItem
-					key={expense.id}
-					// description={expense.description}
-					// amount={expense.amount}
-					// createdAt={expense.createdAt}
-					{...expense}
-				/>
-			))
-		)}
+		<div className="list-body">
+			{props.expenses.length === 0 ? (
+				<div className="list-item list-item-msg">
+					<span>No current expenses</span>
+				</div>
+			) : (
+				props.expenses.map(expense => (
+					<ExpenseListItem key={expense.id} {...expense} />
+				))
+			)}
+		</div>
 	</div>
 );
 
