@@ -1,0 +1,17 @@
+.loader {
+	margin: 0 auto;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+.loader-image {
+	margin-top: 17%;
+	height: 15rem;
+	width: 15rem;
+	border-radius: 8px;
+}
+
+.loader-container {
+	background: #f9f9f9;
+	height: 100vh;
+}
