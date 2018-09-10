@@ -26,7 +26,10 @@
 }
 
 .button-other {
+	@extend .button;
 	background: gray;
-	margin-top: $m-size;
-	margin-bottom: $m-size;
+	@media (min-width: $desktop-breakpoint) {
+		margin-top: $m-size;
+		margin-bottom: $m-size;
+	}
 }

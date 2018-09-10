@@ -4,6 +4,9 @@
 	> * {
 		margin-bottom: $m-size;
 	}
+	@media (max-width: $desktop-breakpoint) {
+		// margin-bottom: $s-size;
+	}
 }
 
 .form-error {
