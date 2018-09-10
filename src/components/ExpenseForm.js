@@ -13,8 +13,12 @@ export default class ExpenseForm extends Component {
 		this.state = {
 			description: props.expense ? props.expense.description : '',
 			note: props.expense ? props.expense.note : '',
-			amount: props.expense ? (props.expense.amount / 100).toString() : '',
-			createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+			amount: props.expense
+				? (props.expense.amount / 100).toString()
+				: '',
+			createdAt: props.expense
+				? moment(props.expense.createdAt)
+				: moment(),
 			calendarFocused: false,
 			error: ''
 		};
@@ -69,10 +73,11 @@ export default class ExpenseForm extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="content">
 				{this.state.error && <p>{this.state.error}</p>}
 				<form onSubmit={this.onSubmit}>
 					<input
+						className="text-input"
 						type="text"
 						placeholder="Description"
 						autoFocus
@@ -80,12 +85,14 @@ export default class ExpenseForm extends Component {
 						onChange={this.onDescriptionChange}
 					/>
 					<input
+						className="text-input"
 						value={this.state.amount}
 						type="text"
 						placeholder="Amount"
 						onChange={this.onAmountChange}
 					/>
 					<SingleDatePicker
+						className="text-input"
 						date={this.state.createdAt}
 						onDateChange={this.onDateChange}
 						focused={this.state.calendarFocused}
@@ -95,12 +102,15 @@ export default class ExpenseForm extends Component {
 						isOutsideRange={() => false}
 					/>
 					<textarea
+						className="textarea"
 						value={this.state.note}
 						onChange={this.onNoteChange}
 						placeholder="Add a note for your expense(optional)"
 					/>
 				</form>
-				<button onClick={this.onSubmit}>Add Expense</button>
+				<button className="button" onClick={this.onSubmit}>
+					Add Expense
+				</button>
 			</div>
 		);
 	}
