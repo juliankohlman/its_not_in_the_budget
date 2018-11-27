@@ -16,7 +16,7 @@ export default class ExpenseForm extends Component {
 			amount: props.expense ? (props.expense.amount / 100).toString() : '',
 			createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
 			calendarFocused: false,
-			recurringExpense: true,
+			recurringExpense: false,
 			error: ''
 		};
 	}
@@ -36,13 +36,11 @@ export default class ExpenseForm extends Component {
 		}));
 	};
 
-	onRecurringChange = e => {
-		console.log(e.target.value);
+	onRecurringChange = () => {
 		const recurring = !this.state.recurringExpense;
 		this.setState(() => ({
 			recurringExpense: recurring
 		}));
-		console.log(this.state);
 	};
 
 	onNoteChange = e => {
@@ -122,7 +120,6 @@ export default class ExpenseForm extends Component {
 						/>
 						<span className="switch-left">Yes</span>
 						<span className="switch-right">No</span>
-						{/* ON CLICK HANDLER TO TOGGLE STATE OF recurring state value */}
 					</label>
 				</form>
 				<button className="button" onClick={this.onSubmit}>
