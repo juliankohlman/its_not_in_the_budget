@@ -13,12 +13,8 @@ export default class ExpenseForm extends Component {
 		this.state = {
 			description: props.expense ? props.expense.description : '',
 			note: props.expense ? props.expense.note : '',
-			amount: props.expense
-				? (props.expense.amount / 100).toString()
-				: '',
-			createdAt: props.expense
-				? moment(props.expense.createdAt)
-				: moment(),
+			amount: props.expense ? (props.expense.amount / 100).toString() : '',
+			createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
 			calendarFocused: false,
 			error: ''
 		};
@@ -75,9 +71,7 @@ export default class ExpenseForm extends Component {
 		return (
 			<div className="content">
 				<form className="form" onSubmit={this.onSubmit}>
-					{this.state.error && (
-						<p className="form-error">{this.state.error}</p>
-					)}
+					{this.state.error && <p className="form-error">{this.state.error}</p>}
 					<input
 						className="text-input"
 						type="text"
@@ -99,8 +93,7 @@ export default class ExpenseForm extends Component {
 						onDateChange={this.onDateChange}
 						focused={this.state.calendarFocused}
 						onFocusChange={this.onFocusChange}
-						numberOfMonths={1}
-						// makes current day and any day in the past available
+						numberOfMonths={1} // makes current day and any day in the past available
 						isOutsideRange={() => false}
 					/>
 					<textarea
@@ -109,6 +102,13 @@ export default class ExpenseForm extends Component {
 						onChange={this.onNoteChange}
 						placeholder="Add a note for your expense(optional)"
 					/>
+					<p className="recurring-label">Recurring Expense?</p>
+					<label className="rocker rocker-small">
+						<input type="checkbox" />
+						<span className="switch-left">Yes</span>
+						<span className="switch-right">No</span>
+						{/* ON CLICK HANDLER TO TOGGLE STATE OF recurring state value */}
+					</label>
 				</form>
 				<button className="button" onClick={this.onSubmit}>
 					Save Expense

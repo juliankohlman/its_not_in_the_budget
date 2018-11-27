@@ -7,6 +7,12 @@
 	@media (max-width: $desktop-breakpoint) {
 		// margin-bottom: $s-size;
 	}
+
+	.recurring-label {
+		color: $mid-grey;
+		font-size: $font-size-lg;
+		margin: 0;
+	}
 }
 
 .form-error {
