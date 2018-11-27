@@ -16,6 +16,7 @@ export default class ExpenseForm extends Component {
 			amount: props.expense ? (props.expense.amount / 100).toString() : '',
 			createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
 			calendarFocused: false,
+			recurringExpense: true,
 			error: ''
 		};
 	}
@@ -33,6 +34,15 @@ export default class ExpenseForm extends Component {
 		this.setState(() => ({
 			description
 		}));
+	};
+
+	onRecurringChange = e => {
+		console.log(e.target.value);
+		const recurring = !this.state.recurringExpense;
+		this.setState(() => ({
+			recurringExpense: recurring
+		}));
+		console.log(this.state);
 	};
 
 	onNoteChange = e => {
@@ -62,7 +72,8 @@ export default class ExpenseForm extends Component {
 				description: this.state.description,
 				amount: parseFloat(this.state.amount, 10) * 100,
 				createdAt: this.state.createdAt.valueOf(),
-				note: this.state.note
+				note: this.state.note,
+				recurringExpense: this.state.recurringExpense
 			});
 		}
 	};
@@ -104,7 +115,11 @@ export default class ExpenseForm extends Component {
 					/>
 					<p className="recurring-label">Recurring Expense?</p>
 					<label className="rocker rocker-small">
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							value={this.state.recurringExpense}
+							onClick={this.onRecurringChange}
+						/>
 						<span className="switch-left">Yes</span>
 						<span className="switch-right">No</span>
 						{/* ON CLICK HANDLER TO TOGGLE STATE OF recurring state value */}
