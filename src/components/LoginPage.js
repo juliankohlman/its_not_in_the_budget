@@ -7,7 +7,7 @@ export const Login = ({ startLogin }) => {
 		<div className="layout">
 			<div className="login-layout">
 				<h1 className="login-title">It's Not In The Budget</h1>
-				<p>
+				<p className="welcome-message">
 					Wealth consists not in having great possessions, but in
 					having few wants. ...
 				</p>

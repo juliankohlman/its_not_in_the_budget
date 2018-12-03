@@ -1,6 +1,6 @@
 .layout {
 	// background: url('/images/christine-roy-343235-unsplash.jpg');
-	background: url('/images/jordan-whitfield-112404-unsplash.jpg');
+	background: url('/images/deskCalculator.jpeg');
 	background-size: cover;
 	height: 100vh;
 	width: 100vw;
@@ -8,7 +8,11 @@
 	justify-content: center;
 	align-items: center;
 	.login-title {
+		font-family: $poor-story;
 		margin: 0 0 $m-size 0;
+	}
+	.welcome-message {
+		font-family: $montserrat;
 	}
 }
 
