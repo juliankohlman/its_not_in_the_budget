@@ -3,9 +3,7 @@
 	"version": "1.0.0",
 	"main": "app.js",
 	"license": "MIT",
-	"engines": {
-		"node": "10.9.0"
-	},
+	"engines": {},
 	"scripts": {
 		"build:dev": "webpack",
 		"build:prod": "webpack -p --env production",
@@ -68,7 +66,7 @@
 	"devDependencies": {
 		"cross-env": "^5.2.0",
 		"dotenv": "^6.0.0",
-		"webpack-cli": "^2.0.14",
+		"webpack-cli": "^3.1.2",
 		"webpack-dev-server": "^3.1.3"
 	}
 }
