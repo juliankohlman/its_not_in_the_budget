@@ -10,6 +10,7 @@
 }
 
 .input-item {
+	font-family: $montserrat;
 	margin-bottom: $s-size;
 	@media (min-width: $desktop-breakpoint) {
 		margin-right: $s-size;

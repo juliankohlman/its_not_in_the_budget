@@ -3,7 +3,7 @@
 	border: none;
 	color: #efefef;
 	padding: 10px;
-	font-family: $poor-story;
+	font-family: $montserrat;
 	font-size: $font-size-lg;
 	font-weight: 300;
 	display: inline-block;
@@ -22,7 +22,7 @@
 	cursor: pointer;
 	transition: font-weight 0.3s ease;
 	&:hover {
-		background: none;
+		background: #2953a0;
 		font-weight: bold;
 	}
 }
